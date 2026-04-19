@@ -5,6 +5,7 @@ public class agentOption : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     [SerializeField] bool correct;
     [SerializeField] GameObject hover;
+    [SerializeField] GameObject win;
     void Start()
     {
         hover.SetActive(false);
@@ -18,8 +19,7 @@ public class agentOption : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (correct) Debug.Log("yay");
-        else Debug.Log("no");
+        win.SetActive(true);
     }
 
     private void OnMouseOver()

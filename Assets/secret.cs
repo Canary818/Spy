@@ -19,7 +19,6 @@ public class secret : MonoBehaviour
     {
         if (collision.gameObject.name == "vision") gameObject.GetComponent<SpriteRenderer>().enabled = true;
         gameObject.GetComponent<ParticleSystem>().Play();
-        Debug.Log("meow");
     }
 
     private void OnTriggerExit2D(Collider2D collision)

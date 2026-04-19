@@ -6,6 +6,8 @@ public class ComboLock : MonoBehaviour
     private int[] inputCombo = {0, 0, 0, 0, 0};
     private int[] answer = {1, 2, 4, 1, 3};
     private int inputCount = 0;
+    [SerializeField] GameObject parlorPuzzle;
+    [SerializeField] GameObject parlorPuzzle2;
     void Start()
     {
         
@@ -22,8 +24,16 @@ public class ComboLock : MonoBehaviour
         inputCombo[inputCount] = input;
         inputCount++;
         if (inputCount < 5) if (!check()) Reset();
-        if (inputCount == 5) if (check()) complete(); else Reset();
+        if (inputCount == 5)
+        {
+            if (check())
+            {
+                complete();
+                Reset();
+            }
 
+            else Reset();
+        }
     }
 
     bool check()
@@ -34,10 +44,12 @@ public class ComboLock : MonoBehaviour
     private void Reset()
     {
         for (int i = 0; i < inputCombo.Length; i++) inputCombo[i] = 0;
+        inputCount = 0;
     }
 
     void complete()
     {
-
+        parlorPuzzle.SetActive(true);
+        parlorPuzzle2.SetActive(false);
     }
 }

@@ -9,6 +9,10 @@ public class movement : MonoBehaviour
     private bool jumping = false;
     public bool vision = false;
     [SerializeField] GameObject visionField;
+    [SerializeField] Sprite sprite1;
+    [SerializeField] Sprite sprite2;
+    private float timer;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -17,6 +21,8 @@ public class movement : MonoBehaviour
         moveAction = InputSystem.actions.FindAction("Move");
         jumpAction = InputSystem.actions.FindAction("Jump");
         visionField.SetActive(false);
+        timer = 0.5f;
+        
     }
 
     // Update is called once per frame
@@ -37,6 +43,13 @@ public class movement : MonoBehaviour
                 jumping = true;
             }
         }
+        if (timer >= 0) timer -= Time.deltaTime;
+        else 
+        {
+            timer = 0.5f;
+            if (gameObject.GetComponent<SpriteRenderer>().sprite == sprite1) gameObject.GetComponent<SpriteRenderer>().sprite = sprite2;
+            else gameObject.GetComponent<SpriteRenderer>().sprite = sprite1;
+        };
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -54,4 +67,5 @@ public class movement : MonoBehaviour
     {
         toggleVision();
     }
+
 }

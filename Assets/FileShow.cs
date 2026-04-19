@@ -4,9 +4,15 @@ public class FileShow : MonoBehaviour
 {
     [SerializeField] GameObject normal;
     [SerializeField] GameObject secret;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private float min;
+    private float max;
+  
+    // Start is called before the first frame update
     void Start()
     {
+        min = transform.position.y - 0.1f;
+        max = transform.position.y + 0.3f;
+        transform.position = new Vector3(transform.position.x, Random.Range(min, max), 0);
         normal.SetActive(false);
         secret.SetActive(false);
     }
@@ -14,7 +20,7 @@ public class FileShow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.position = new Vector3(transform.position.x, Mathf.PingPong(Time.time * 0.6f, max - min) + min, transform.position.z);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
